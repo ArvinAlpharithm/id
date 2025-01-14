@@ -118,7 +118,7 @@ def main():
             id_image = Image.open(id_file)
             cropped_id_image = st_cropper(id_image, aspect_ratio=(1, 1), box_color="#FF0000")
             st.write("Cropped Photo from ID:")
-            st.image(cropped_id_image, use_column_width=True)
+            st.image(cropped_id_image, use_container_width=True)
 
         # Camera input for selfie
         selfie_file = st.camera_input("Take a selfie")
