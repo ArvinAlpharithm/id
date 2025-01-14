@@ -3,3 +3,6 @@ torch==2.2.0
 transformers==4.37.2
 pillow==10.2.0
 numpy==1.26.4
+asyncpg
+streamlit-cropper
+python-dotenv
