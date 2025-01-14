@@ -133,7 +133,7 @@ def main():
                     st.image(selfie_image, caption="Selfie")
                 
                 if st.button("Verify"):
-                    with st.spinner("Comparing..."):
+                    with st.spinner("Verifying..."):
                         similarity_score = compare_images(cropped_id_image, selfie_image, model, processor)
                         similarity_percentage = round(similarity_score * 100, 2)
                         verification_status = "verified" if similarity_percentage >= 60 else "not verified"
