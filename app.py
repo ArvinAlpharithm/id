@@ -8,6 +8,10 @@ import os
 import asyncio
 import asyncpg
 import logging
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Neon DB connection parameters
 NEON_DB_USER = os.getenv("NEON_DB_USER")
@@ -35,9 +39,9 @@ async def user_exists(username):
         return result[0]['count'] > 0
     except Exception as e:
         logging.error(f"Error checking existence of user {username}: {e}")
+        return False
     finally:
         await conn.close()
-    return False
 
 async def create_new_user(username):
     """Create a new user in the database"""
@@ -86,7 +90,7 @@ def compare_images(image1, image2, model, processor):
     return float(similarity)
 
 def main():
-    st.title("Simple Image Comparison System with Neon DB")
+   
     
     # Step 1: Get the username
     username = st.text_input("Enter your username:")
@@ -133,7 +137,12 @@ def main():
                         similarity_score = compare_images(cropped_id_image, selfie_image, model, processor)
                         similarity_percentage = round(similarity_score * 100, 2)
                         verification_status = "verified" if similarity_percentage >= 60 else "not verified"
-                        st.success(f"ID Verification: {verification_status.capitalize()}") if similarity_percentage >= 60 else st.error(f"ID Verification: {verification_status.capitalize()}")
+                        
+                        # Display result
+                        if verification_status == "verified":
+                            st.success(f"ID Verification: Verified")
+                        else:
+                            st.error(f"ID Verification: Not Verified")
                         
                         # Log verification result in Neon DB
                         asyncio.run(log_verification_result(username, verification_status))
