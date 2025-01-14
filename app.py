@@ -128,7 +128,7 @@ def main():
                 selfie_image = Image.open(selfie_file)
                 col1, col2 = st.columns(2)
                 with col1:
-                    st.image(cropped_id_image, caption="Cropped ID Photo")
+                    st.image(cropped_id_image, caption="ID Photo")
                 with col2:
                     st.image(selfie_image, caption="Selfie")
                 
