@@ -132,7 +132,7 @@ def main():
                 with col2:
                     st.image(selfie_image, caption="Selfie")
                 
-                if st.button("Compare Images"):
+                if st.button("Verify"):
                     with st.spinner("Comparing..."):
                         similarity_score = compare_images(cropped_id_image, selfie_image, model, processor)
                         similarity_percentage = round(similarity_score * 100, 2)
